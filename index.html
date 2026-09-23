@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RescueLane Hyderabad — Emergency Vehicle Assistance</title>
+<style>
+:root{--ink:#10233f;--blue:#1769e0;--sky:#eef6ff;--green:#15966f;--orange:#f59b23;--red:#e65050;--muted:#68778c;--line:#dfe7f1;--bg:#f5f7fb;--shadow:0 12px 32px rgba(18,42,72,.1)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer}.top{background:linear-gradient(135deg,#0d2340,#1459ae);color:#fff;padding:18px 20px 34px}
+.nav,.hero,.wrap,.footer{max-width:1100px;margin:auto}.nav{display:flex;justify-content:space-between;align-items:center}
+.brand{font-size:22px;font-weight:850}.brand span{color:#65b7ff}.pill{font-size:12px;background:#ffffff24;padding:8px 12px;border-radius:99px}
+.hero{margin-top:28px}.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.03;margin:0 0 12px;max-width:720px}
+.hero p{max-width:650px;color:#dbeaff;font-size:16px;line-height:1.6}.wrap{margin-top:-18px;padding:0 18px 50px}
+.switch{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:6px;display:flex;gap:6px;max-width:430px;margin-bottom:18px}
+.switch button{flex:1;border:0;background:transparent;padding:12px;border-radius:11px;font-weight:750;color:var(--muted)}
+.switch button.active{background:var(--ink);color:#fff}.panel{display:none}.panel.active{display:block}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 22px #122a4810}
+.card h2{font-size:20px;margin:0 0 6px}.sub{font-size:13px;color:var(--muted);margin:0 0 18px}
+.issues{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.issue{border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px 10px;text-align:left}
+.issue:hover,.issue.selected{border-color:var(--blue);background:var(--sky)}.icon{font-size:24px;display:block;margin-bottom:8px}.issue strong{font-size:13px}
+.location{display:flex;gap:10px;align-items:center;background:#f7f9fc;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:16px;font-size:13px}
+.location b{color:var(--green)}.primary{width:100%;border:0;background:var(--blue);color:#fff;padding:14px;border-radius:12px;font-weight:800;margin-top:16px}
+.map{height:260px;border-radius:14px;background:linear-gradient(135deg,#eaf5e9,#d9ebf8);position:relative;overflow:hidden;border:1px solid #d2e1dd}
+.road{position:absolute;background:#fff;box-shadow:0 0 0 1px #cbdad4;transform:rotate(-18deg)}.r1{width:120%;height:42px;top:100px;left:-10%}
+.r2{width:100%;height:30px;top:35px;left:8%;transform:rotate(42deg)}
+.pin{position:absolute;left:48%;top:42%;width:28px;height:28px;border-radius:50% 50% 50% 0;background:var(--red);transform:rotate(-45deg)}
+.pin:after{content:"";position:absolute;width:10px;height:10px;background:#fff;border-radius:50%;left:9px;top:9px}
+.vendor-dot{position:absolute;width:13px;height:13px;border:3px solid #fff;border-radius:50%;background:var(--green)}.d1{left:22%;top:28%}.d2{left:73%;top:62%}.d3{left:63%;top:25%}
+.maplabel{position:absolute;bottom:10px;left:10px;background:#fff;padding:7px 9px;border-radius:9px;font-size:11px}
+.vendor{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.vendor:last-child{border-bottom:0}
+.logo{width:44px;height:44px;border-radius:12px;background:#eaf3ff;display:grid;place-items:center;font-weight:850;color:var(--blue)}
+.vendor h3{font-size:14px;margin:0 0 3px}.vendor small{color:var(--muted)}.badge{margin-left:auto;background:#e8f8f1;color:#117652;border-radius:99px;padding:5px 8px;font-size:10px;font-weight:800}
+.request{border-left:4px solid var(--orange);background:#fff8ec;padding:12px;border-radius:10px;margin:12px 0}.mini{font-size:12px;color:var(--muted)}
+.actions{display:flex;gap:8px}.actions button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--line);font-weight:750}
+.accept{background:var(--green)!important;color:#fff;border-color:var(--green)!important}.note{background:#edf6ff;border:1px solid #d5e8ff;border-radius:12px;padding:13px;font-size:12px;line-height:1.5;color:#315070}
+.steps{border-left:2px solid #dbe8e3;margin-left:13px;padding-left:18px}.status{display:flex;gap:12px;padding:12px 0}
+.circle{width:28px;height:28px;border-radius:50%;background:#e9f7f1;color:var(--green);display:grid;place-items:center;font-size:12px;font-weight:800}
+.status b{font-size:13px}.status p{font-size:12px;color:var(--muted);margin:3px 0}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;display:none;box-shadow:var(--shadow);font-size:13px;z-index:5}
+.footer{padding:0 18px 40px;color:var(--muted);font-size:12px;text-align:center}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.issues{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="nav"><div class="brand">Rescue<span>Lane</span></div><div class="pill">HYDERABAD • CLIENT DEMO</div></div>
+<div class="hero"><h1>Emergency vehicle help, connected to the right nearby vendor.</h1>
+<p>RescueLane connects stranded drivers with a curated network of approved emergency-service providers — so customers get help faster and vendors receive relevant nearby jobs.</p></div>
+</header>
+<main class="wrap">
+<div class="switch"><button id="customerBtn" class="active" onclick="showPanel('customer')">Customer Journey</button><button id="vendorBtn" onclick="showPanel('vendor')">Vendor Journey</button></div>
+
+<section id="customer" class="panel active"><div class="grid">
+<div class="card"><h2>Request emergency assistance</h2><p class="sub">Only emergency vehicle situations are routed through RescueLane.</p>
+<div class="issues">
+<button class="issue" onclick="selectIssue(this,'Vehicle Breakdown')"><span class="icon">🚗</span><strong>Vehicle Breakdown</strong></button>
+<button class="issue" onclick="selectIssue(this,'Flat Tyre')"><span class="icon">🛞</span><strong>Flat Tyre</strong></button>
+<button class="issue" onclick="selectIssue(this,'Dead Battery')"><span class="icon">🔋</span><strong>Dead Battery</strong></button>
+<button class="issue" onclick="selectIssue(this,'Out of Fuel')"><span class="icon">⛽</span><strong>Out of Fuel</strong></button>
+<button class="issue" onclick="selectIssue(this,'Accident / Collision')"><span class="icon">💥</span><strong>Accident / Collision</strong></button>
+<button class="issue" onclick="selectIssue(this,'Need Towing')"><span class="icon">🚚</span><strong>Need Towing</strong></button>
+</div>
+<div class="location">📍 <span><b>Location detected</b><br>Jubilee Hills, Hyderabad</span></div>
+<button class="primary" onclick="findHelp()">Request Emergency Assistance</button></div>
+
+<div class="card"><h2>Nearby approved providers</h2><p class="sub">Customers see only vendors that are approved and active on the RescueLane network.</p>
+<div class="map"><div class="road r1"></div><div class="road r2"></div><div class="pin"></div><i class="vendor-dot d1"></i><i class="vendor-dot d2"></i><i class="vendor-dot d3"></i><span class="maplabel">Your vehicle • Jubilee Hills</span></div>
+<div class="vendor"><div class="logo">RP</div><div><h3>Rapid Recovery Hyderabad</h3><small>1.8 km • 7–10 min • Towing</small></div><span class="badge">APPROVED</span></div>
+<div class="vendor"><div class="logo">AS</div><div><h3>AutoServe 24×7</h3><small>2.4 km • 10–14 min • Roadside</small></div><span class="badge">APPROVED</span></div>
+<div class="vendor"><div class="logo">BT</div><div><h3>Battery &amp; Tyre Express</h3><small>3.1 km • 12–16 min • Battery/Tyre</small></div><span class="badge">APPROVED</span></div>
+</div></div></section>
+
+<section id="vendor" class="panel"><div class="grid">
+<div class="card"><h2>Vendor dashboard</h2><p class="sub">Approved vendors receive nearby emergency requests that match their service capability.</p>
+<div class="request"><b>🔔 New emergency request</b><div class="mini">2.4 km away • Jubilee Hills</div>
+<p style="font-size:13px"><b>Dead Battery</b> • Hyundai Creta • Customer: Rajesh K.</p>
+<div class="actions"><button class="accept" onclick="acceptJob()">Accept Request</button><button onclick="declineJob()">Decline</button></div></div>
+<div class="note"><b>Why vendors join:</b> RescueLane routes relevant nearby emergencies to approved providers. Vendors control availability, service areas and the requests they accept.</div></div>
+
+<div class="card"><h2>Active job</h2><p class="sub">Demo job #RL-1024</p>
+<div class="map"><div class="road r1"></div><div class="road r2"></div><div class="pin" style="left:55%;top:48%"></div><i class="vendor-dot d1" style="left:31%;top:60%"></i><span class="maplabel">Customer • 2.4 km away</span></div>
+<div class="steps">
+<div class="status"><div class="circle">✓</div><div><b>Request accepted</b><p>Vendor accepted the emergency.</p></div></div>
+<div class="status"><div class="circle">2</div><div><b>En route</b><p>Estimated arrival: 8 minutes.</p></div></div>
+<div class="status"><div class="circle">3</div><div><b>Arrived</b><p>Mark when you reach the vehicle.</p></div></div>
+<div class="status"><div class="circle">4</div><div><b>Job completed</b><p>Close the assistance request.</p></div></div>
+</div><button class="primary" onclick="nextStatus()">Update Job Status</button></div>
+</div></section>
+</main>
+<div id="toast" class="toast"></div>
+<div class="footer">Prototype for vendor/customer validation • Sample data only • RescueLane Hyderabad</div>
+<script>
+let selected='',status=1;
+function showPanel(p){document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));document.getElementById(p).classList.add('active');document.getElementById('customerBtn').classList.toggle('active',p==='customer');document.getElementById('vendorBtn').classList.toggle('active',p==='vendor')}
+function selectIssue(el,name){document.querySelectorAll('.issue').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');selected=name}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',2400)}
+function findHelp(){if(!selected){toast('Select an emergency type first.');return}toast('Request sent — matching approved nearby vendors for '+selected+'.');setTimeout(()=>showPanel('vendor'),900)}
+function acceptJob(){toast('Request accepted. Customer has been notified.')}
+function declineJob(){toast('Request declined. It will be offered to another approved vendor.')}
+function nextStatus(){status++;let labels=['Request accepted','En route','Arrived','Job completed'];toast(status>=4?'Job completed — customer notified.':'Status updated: '+labels[status]);if(status>=4)status=1}
+</script>
+</body>
+</html>
